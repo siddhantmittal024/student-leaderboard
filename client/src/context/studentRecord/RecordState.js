@@ -31,9 +31,13 @@ const RecordState = (props) => {
   const addRecord = async (record) => {
     try {
       const res = await axios.post('api/student/createRecord', record);
-      dispatch({ type: ADD_RECORD, payload: res.data });
+      console.log(res);
+      dispatch({ type: ADD_RECORD, payload: record });
     } catch (err) {
-      dispatch({ type: RECORD_ERROR, payload: err.response.data.msg });
+      dispatch({
+        type: RECORD_ERROR,
+        payload: 'Error in insertion! Try again!'
+      });
     }
   };
 

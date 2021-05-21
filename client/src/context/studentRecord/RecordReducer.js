@@ -12,7 +12,7 @@ export default (state, action) => {
     case ADD_RECORD:
       return {
         ...state,
-        records: [action.payload, ...state.records],
+        records: [action.payload],
         loading: false
       };
     case RECORD_ERROR:

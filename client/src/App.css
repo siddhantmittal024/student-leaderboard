@@ -29,6 +29,11 @@
   flex-direction: column;
 }
 
+.search-bar{
+  align-items: center;
+  width: 80%;
+}
+
 .total-box{
   font-size: 18px;
   font-weight: 700;
@@ -234,7 +239,7 @@ img {
 /* Grid */
 .grid{
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 1fr 1fr 1fr 1fr 0.8fr ;
+  grid-template-columns: repeat(7,1fr) ;
   border-top: 1px solid black;
   border-right: 1px solid black;
 }
