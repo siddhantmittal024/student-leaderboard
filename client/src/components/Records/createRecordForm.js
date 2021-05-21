@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import RecordContext from '../../context/studentRecord/RecordContext';
-import AlertContext from '../../context/alert/AlertContext';
+import { Link } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 
 export const RecordForm = () => {
-  const alertContext = useContext(AlertContext);
   const recordContext = useContext(RecordContext);
-  const { addRecord } = recordContext;
-  const { setAlert } = alertContext;
+  const { addRecord, error, records, getRecords } = recordContext;
+
+  //const [recordCreated, setRecordCreated] = useState(false);
 
   const [record, setRecord] = useState({
     RollNo: '',
@@ -17,6 +19,17 @@ export const RecordForm = () => {
   });
 
   const { RollNo, Name, MathsMarks, PhysicsMarks, ChemMarks } = record;
+
+  //getRecords();
+
+  useEffect(() => {
+    //getRecords();
+    if (error === 'Student Record already exists!!') {
+      toast.error(error);
+    }
+    //console.log(records.lengths);
+    //eslint-disable-next-line
+  }, [error]);
 
   const onChange = (e) =>
     setRecord({ ...record, [e.target.name]: e.target.value });
@@ -30,20 +43,32 @@ export const RecordForm = () => {
       PhysicsMarks === '' ||
       ChemMarks === ''
     ) {
-      alert('Please fill all the fields!');
+      toast.error('Please fill all the fields!');
       //setAlert('Please fill all the fields', 'danger');
-    } else if (MathsMarks > 100 || PhysicsMarks > 100 || ChemMarks > 100) {
-      alert('Marks should be between 0 to 100');
+    } else if (
+      MathsMarks < 0 ||
+      PhysicsMarks < 0 ||
+      ChemMarks < 0 ||
+      MathsMarks > 100 ||
+      PhysicsMarks > 100 ||
+      ChemMarks > 100
+    ) {
+      toast.error('Marks should be between 0 to 100');
       //setAlert('Marks should be between 0 to 100', 'danger');
     } else {
-      addRecord(record);
-      alert('Record Added Successfully!');
+      try {
+        addRecord(record);
+        toast.success('Record Added!');
+      } catch (err) {
+        toast.error('Not filled');
+      }
+
       setRecord({
         RollNo: '',
         Name: '',
-        MathsMarks: '',
-        PhysicsMarks: '',
-        ChemMarks: ''
+        MathsMarks: 0,
+        PhysicsMarks: 0,
+        ChemMarks: 0
       });
     }
   };
@@ -86,29 +111,37 @@ export const RecordForm = () => {
         value={ChemMarks}
         onChange={onChange}
       />
-      {(MathsMarks !== '' || PhysicsMarks !== '' || ChemMarks !== '') && (
-        <div>
-          TOTAL MARKS:{' '}
-          {`${
-            parseInt(ChemMarks) + parseInt(PhysicsMarks) + parseInt(MathsMarks)
-          }`}
-          PERCENTAGE:{' '}
-          {`${(
-            ((parseInt(ChemMarks) +
+      {MathsMarks !== '' && PhysicsMarks !== '' && ChemMarks !== '' && (
+        <div className="lower-box">
+          <div className="py-2 total-box">
+            TOTAL MARKS :{' '}
+            {`${
+              parseInt(ChemMarks) +
               parseInt(PhysicsMarks) +
-              parseInt(MathsMarks)) /
-              300) *
-            100
-          ).toFixed(2)}%`}
+              parseInt(MathsMarks)
+            }`}
+          </div>
+          <div className="total-box">
+            PERCENTAGE :{' '}
+            {`${(
+              ((parseInt(ChemMarks) +
+                parseInt(PhysicsMarks) +
+                parseInt(MathsMarks)) /
+                300) *
+              100
+            ).toFixed(2)}%`}
+          </div>
         </div>
       )}
-
       <div>
         <input
           type="submit"
           value={'Add Record'}
           className="btn btn-dark btn-block"
         />
+        <div className="py-2 back-button">
+          <Link to="/">Back</Link>
+        </div>
       </div>
     </form>
   );

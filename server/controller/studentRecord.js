@@ -11,7 +11,6 @@ export const createStudentRecord = async(req,res)=>{
             ChemMarks,
         } = req.body;
 
-        console.log(req.body);
 
         if(!RollNo || !Name ){
             return res.status(400).json({
@@ -43,9 +42,12 @@ export const createStudentRecord = async(req,res)=>{
 
         const [recordCreated] = await connect.execute(createRecord,[RollNo,Name,MathsMarks,PhysicsMarks,ChemMarks,TotalMarks,Percentage]);
 
+
         return res.status(201).json({
             msg: 'Record Added Successfully!!'
         });
+
+       
     } catch(err){
         console.log(err);
         return res.status(500).json({

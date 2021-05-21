@@ -1,10 +1,12 @@
 import React from 'react';
+import Records from '../Leaderboard/leaderBoardTable';
 
 const LeaderboardPage = () => {
   return (
     <div className="container">
       <div className="box">
-        <h1>LEADERBOARD</h1>
+        <h1 className="py-2">LEADERBOARD</h1>
+        <Records />
       </div>
     </div>
   );

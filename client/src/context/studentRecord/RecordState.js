@@ -15,7 +15,7 @@ const RecordState = (props) => {
 
   const getRecords = async () => {
     try {
-      const res = await axios.get('api/student/getRecords');
+      const res = await axios.get('api/student/displayRecords');
       dispatch({
         type: GET_RECORDS,
         payload: res.data
@@ -23,7 +23,7 @@ const RecordState = (props) => {
     } catch (err) {
       dispatch({
         type: RECORD_ERROR,
-        payload: err.response.msg
+        payload: err.response.data.msg
       });
     }
   };
@@ -33,14 +33,14 @@ const RecordState = (props) => {
       const res = await axios.post('api/student/createRecord', record);
       dispatch({ type: ADD_RECORD, payload: res.data });
     } catch (err) {
-      dispatch({ type: RECORD_ERROR, payload: err.response.msg });
+      dispatch({ type: RECORD_ERROR, payload: err.response.data.msg });
     }
   };
 
   return (
     <recordContext.Provider
       value={{
-        contacts: state.records,
+        records: state.records,
         error: state.error,
         addRecord,
         getRecords
