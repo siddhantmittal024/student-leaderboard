@@ -29,9 +29,12 @@
   flex-direction: column;
 }
 
+.p-left{
+  padding-left: 0.5rem;
+}
+
 .search-bar{
-  align-items: center;
-  width: 80%;
+  margin-bottom: 20px;
 }
 
 .total-box{
@@ -404,11 +407,10 @@ input[type='number'],
 select,
 textarea {
   display: block;
-  width: 30%;
+  width: 40%;
   padding: 0.4rem;
   font-size: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  border: 1px solid ;
   margin: auto;
   margin-top: 20px;
 }

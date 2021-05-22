@@ -14,8 +14,6 @@ export const Records = () => {
     //eslint-disable-next-line
   }, []);
 
-  let sRecords = [records.data];
-
   const [sortField, setSorted] = useState(null);
 
   if (loading) {
@@ -33,6 +31,7 @@ export const Records = () => {
           <input
             type="text"
             value={q}
+            className="search-input"
             placeholder="Search by name..."
             onChange={(e) => setQ(e.target.value)}
           />
@@ -42,7 +41,7 @@ export const Records = () => {
         <span>
           <strong>Rank</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Rank')}
           ></i>
@@ -50,7 +49,7 @@ export const Records = () => {
         <span>
           <strong>Roll No.</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Roll No')}
           ></i>
@@ -58,7 +57,7 @@ export const Records = () => {
         <span>
           <strong>Name</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Name')}
           ></i>
@@ -66,7 +65,7 @@ export const Records = () => {
         <span>
           <strong>Maths</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Maths')}
           ></i>
@@ -74,7 +73,7 @@ export const Records = () => {
         <span>
           <strong>Physics</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Physics')}
           ></i>
@@ -83,14 +82,7 @@ export const Records = () => {
           <strong>Chemistry</strong>
 
           <i
-            className="fa fa-sort-up"
-            type="button"
-            onClick={() => setSorted('Chemistry')}
-          >
-            {' '}
-          </i>
-          <i
-            className="fa fa-sort-down"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Chemistry')}
           >
@@ -100,7 +92,7 @@ export const Records = () => {
         <span>
           <strong>Percentage</strong>
           <i
-            className="fa fa-sort-up"
+            className="fa fa-sort-up p-left"
             type="button"
             onClick={() => setSorted('Percentage')}
           ></i>
