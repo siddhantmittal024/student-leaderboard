@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const dotenv = require('dotenv');
 
 const app = express();
@@ -28,6 +29,13 @@ app.use('/api/student',studentRecord);
 // app.get('/',(req,res)=>{
 //     res.send('Hello!')
 // })
+
+if(process.env.NODE_ENV==='production'){
+  //set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req,res)=>res.sendFile(path.resolve(__dirname,'client','build','index.html')));
+}
 
 app.listen(PORT, () => {
   console.log(`HELLO FROM THE SERVER!!RUNNING ON PORT ${PORT}`);
