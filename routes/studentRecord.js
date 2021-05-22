@@ -1,9 +1,10 @@
-import express from 'express';
-import { createStudentRecord, displayStudentRecords } from '../controller/studentRecord'; 
+const express = require('express');
+const studentRecordController = require('../controller/studentRecord');
+
 
 const router = express.Router();
 
-router.post('/createRecord',createStudentRecord);
-router.get('/displayRecords', displayStudentRecords);
+router.post('/createRecord',studentRecordController.createStudentRecord);
+router.get('/displayRecords', studentRecordController.displayStudentRecords);
 
 module.exports = router;

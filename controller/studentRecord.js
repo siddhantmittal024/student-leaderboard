@@ -1,7 +1,8 @@
-import { dbConfig } from '../config/db';
-import mysql from 'mysql2/promise';
+const dbConfig = require('../config/db')
+const mysql = require('mysql2/promise');
 
-export const createStudentRecord = async(req,res)=>{
+
+exports.createStudentRecord = async(req,res)=>{
     try{
         const {
             RollNo,
@@ -29,7 +30,7 @@ export const createStudentRecord = async(req,res)=>{
         const TotalMarks = parseInt(MathsMarks)+parseInt(PhysicsMarks)+parseInt(ChemMarks);
         const Percentage = (TotalMarks/300) * 100;
 
-        const connect = await mysql.createConnection(dbConfig);
+        const connect = await mysql.createConnection(dbConfig.db);
         const [rollNoRes] = await connect.execute(rollNoExists,[RollNo]);
 
         if(rollNoRes.length!==0){
@@ -56,11 +57,11 @@ export const createStudentRecord = async(req,res)=>{
     }
 };
 
-export const displayStudentRecords = async (req,res) => {
+exports.displayStudentRecords = async (req,res) => {
     try{
         const getStudentRecordsQuery = 'Select * from student_record ORDER BY student_record.Percentage DESC';
 
-        const connect = await mysql.createConnection(dbConfig);
+        const connect = await mysql.createConnection(dbConfig.db);
         const [studentRecords] = await connect.execute(getStudentRecordsQuery);
         
         return res.status(200).json({
