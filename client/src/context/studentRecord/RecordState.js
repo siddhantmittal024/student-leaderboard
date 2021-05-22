@@ -15,7 +15,9 @@ const RecordState = (props) => {
 
   const getRecords = async () => {
     try {
-      const res = await axios.get('api/student/displayRecords');
+      const res = await axios.get(
+        'https://student-result-leaderboard.herokuapp.com/api/student/displayRecords'
+      );
       dispatch({
         type: GET_RECORDS,
         payload: res.data
@@ -30,13 +32,16 @@ const RecordState = (props) => {
 
   const addRecord = async (record) => {
     try {
-      const res = await axios.post('api/student/createRecord', record);
-      console.log(res);
+      const res = await axios.post(
+        'https://student-result-leaderboard.herokuapp.com/api/student/createRecord',
+        record
+      );
+      //console.log(res);
       dispatch({ type: ADD_RECORD, payload: record });
     } catch (err) {
       dispatch({
         type: RECORD_ERROR,
-        payload: 'Error in insertion! Try again!'
+        payload: err.response.data.msg
       });
     }
   };

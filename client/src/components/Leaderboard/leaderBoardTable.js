@@ -81,9 +81,20 @@ export const Records = () => {
         </span>
         <span>
           <strong>Chemistry</strong>
-          <i className="fa fa-sort-up">
+
+          <i
+            className="fa fa-sort-up"
+            type="button"
+            onClick={() => setSorted('Chemistry')}
+          >
             {' '}
-            type="button" onClick={() => setSorted('Chemistry')}
+          </i>
+          <i
+            className="fa fa-sort-down"
+            type="button"
+            onClick={() => setSorted('Chemistry')}
+          >
+            {' '}
           </i>
         </span>
         <span>
@@ -98,7 +109,7 @@ export const Records = () => {
           records &&
           records.data
             .filter((record) => {
-              if (q === '') {
+              if (!q) {
                 return record;
               } else if (
                 record.StudentName.toLowerCase().includes(q.toLowerCase())
