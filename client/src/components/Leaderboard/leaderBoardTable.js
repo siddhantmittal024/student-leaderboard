@@ -7,6 +7,8 @@ export const Records = () => {
   const recordContext = useContext(RecordContext);
   const { records, getRecords, loading } = recordContext;
 
+  //const [sort, setSort] = useState({});
+
   const [q, setQ] = useState('');
 
   useEffect(() => {
@@ -14,7 +16,19 @@ export const Records = () => {
     //eslint-disable-next-line
   }, []);
 
-  const [sortField, setSorted] = useState(null);
+  function compareBy(key) {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+
+  function sortBy(key) {
+    let arrayCopy = [...records.data];
+    arrayCopy.sort(compareBy(key));
+    console.log(arrayCopy);
+  }
 
   if (loading) {
     return <>loading</>;
@@ -40,18 +54,13 @@ export const Records = () => {
       <div className="grid">
         <span>
           <strong>Rank</strong>
-          <i
-            className="fa fa-sort-up p-left"
-            type="button"
-            onClick={() => setSorted('Rank')}
-          ></i>
         </span>
         <span>
           <strong>Roll No.</strong>
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Roll No')}
+            onClick={() => sortBy('Roll No.')}
           ></i>
         </span>
         <span>
@@ -59,7 +68,7 @@ export const Records = () => {
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Name')}
+            //onClick={() => setSorted('Name')}
           ></i>
         </span>
         <span>
@@ -67,7 +76,7 @@ export const Records = () => {
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Maths')}
+            //onClick={() => setSorted('Maths')}
           ></i>
         </span>
         <span>
@@ -75,7 +84,7 @@ export const Records = () => {
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Physics')}
+            //onClick={() => setSorted('Physics')}
           ></i>
         </span>
         <span>
@@ -84,7 +93,7 @@ export const Records = () => {
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Chemistry')}
+            //onClick={() => setSorted('Chemistry')}
           >
             {' '}
           </i>
@@ -94,7 +103,7 @@ export const Records = () => {
           <i
             className="fa fa-sort-up p-left"
             type="button"
-            onClick={() => setSorted('Percentage')}
+            //onClick={() => setSorted('Percentage')}
           ></i>
         </span>
         {!loading ? (
