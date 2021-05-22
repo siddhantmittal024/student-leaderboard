@@ -1,14 +1,15 @@
 {
-  "name": "server",
+  "name": "AlmaBetter",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/siddhantmittal024/student-leaderboard.git",
+  "author": "Siddhant Mittal <sidmit2001@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Siddhant Mittal",
-  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
@@ -16,7 +17,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",

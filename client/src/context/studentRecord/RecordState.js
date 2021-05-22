@@ -16,7 +16,7 @@ const RecordState = (props) => {
   const getRecords = async () => {
     try {
       const res = await axios.get(
-        'https://student-result-leaderboard.herokuapp.com/api/student/displayRecords'
+        'http://localhost:5000/api/student/displayRecords'
       );
       dispatch({
         type: GET_RECORDS,
@@ -33,7 +33,7 @@ const RecordState = (props) => {
   const addRecord = async (record) => {
     try {
       const res = await axios.post(
-        'https://student-result-leaderboard.herokuapp.com/api/student/createRecord',
+        'http://localhost:5000/api/student/createRecord',
         record
       );
       //console.log(res);
